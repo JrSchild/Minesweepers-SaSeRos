@@ -6,23 +6,14 @@ import lejos.nxt.NXTRegulatedMotor;
 
 public class main {
 	public static void main(String[] args) throws InterruptedException {
-		Screen.writeLn("oh why");
-		Screen.writeLn("oh why");
-		
+		SonicSensorMotor.turn(-10);
+		Thread.sleep(800);
 		//printInfoScreen();
-		for (int i = 0; i < 3; i++) {
-			SonicSensorMotor.lookLeft();
-			Thread.sleep(800);
-	
-			SonicSensorMotor.lookFront();
-			Thread.sleep(800);
-	
+		
+		for (int i = 0; i < 8; i++) {
 			SonicSensorMotor.lookRight();
 			Thread.sleep(800);
 			
-			SonicSensorMotor.lookLeft();
-			Thread.sleep(800);
-	
 			SonicSensorMotor.lookFront();
 			Thread.sleep(800);
 		}
@@ -61,7 +52,7 @@ class SonicSensorMotor {
 	
 	public static void lookFront() {
 		int degrees = (direction == Direction.LEFT) ? -100 :
-			(direction == Direction.RIGHT) ? 100 : 0;
+			(direction == Direction.RIGHT) ? 101 : 0;
 		direction = Direction.FRONT;
 		turn(degrees);
 	}
