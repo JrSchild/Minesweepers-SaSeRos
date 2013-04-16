@@ -1,6 +1,10 @@
 import lejos.nxt.Motor;
 import lejos.nxt.NXTRegulatedMotor;
 
+/**
+ * @author Joram Ruitenschild
+ * Control the motor of the sonic-sensor.
+ */
 public class SonicSensorMotor {
 	private static Direction direction = Direction.FRONT;
 	private static NXTRegulatedMotor motor = Motor.C;
@@ -35,5 +39,5 @@ public class SonicSensorMotor {
 }
 
 enum Direction {
-	LEFT, FRONT, RIGHT;
+	LEFT, FRONT, RIGHT, BACK;
 }
