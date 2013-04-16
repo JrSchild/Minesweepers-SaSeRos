@@ -1,41 +1,32 @@
-import lejos.nxt.LCD;
+import java.util.ArrayList;
 
 public class main {
+	private static ArrayList<Integer> errors;
+	
 	public static void main(String[] args) throws InterruptedException {
-		Screen.writeLn("oh why");
-		Screen.writeLn("oh why");
+		init();
+		checkForFailure();
 		
 		//printInfoScreen();
 		for (int i = 0; i < 3; i++) {
 			SonicSensorMotor.lookLeft();
-			Thread.sleep(800);
-	
 			SonicSensorMotor.lookFront();
-			Thread.sleep(800);
-			
 			SonicSensorMotor.lookRight();
-			Thread.sleep(800);
-			
-			SonicSensorMotor.lookLeft();
-			Thread.sleep(800);
-	
 			SonicSensorMotor.lookFront();
-			Thread.sleep(800);
 		}
 		
-		SonicSensorMotor.lookFront();
-		Thread.sleep(800);
-	
+		Thread.sleep(3000);
+		
 	}
 	
-	public static void printInfoScreen() {
-		Screen.clear();
-		Screen.writeLn("hello");
-		Screen.writeLn("hello");
-		Screen.writeLn("hello");
-		// Screen.writeLn("sensor 1: " + sensor1.getDistance());
-		// Screen.writeLn("sensor 2: " + sensor2.getDistance());
-		// Screen.writeLn("motor 1:  " + motor1.isOk());
-		// Screen.writeLn("motor 2:  " + motor2.isOk());
+	private static void init() { }
+	
+	private static void checkForFailure() {
+		errors = new ArrayList<Integer>();
+		
+		errors.add(SonicSensor.checkForFaillure());
+		Screen.writeLn("SonicSensor: " + SonicSensor.checkForFaillure());
+		Screen.writeLn("Press the bumper");
+		Screen.writeLn("BumperSensor" + BumperSensor.checkForFaillure());
 	}
 }

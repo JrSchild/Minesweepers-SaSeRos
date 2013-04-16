@@ -7,6 +7,9 @@ public class SonicSensorMotor {
 	
 	public static void turn(int angle) {
 		motor.rotate(angle);
+		try {
+			Thread.sleep(800);
+		} catch (InterruptedException e) { }
 	}
 	
 	public static void lookLeft() {
