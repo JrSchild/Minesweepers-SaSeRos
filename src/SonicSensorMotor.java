@@ -36,8 +36,5 @@ public class SonicSensorMotor {
 		direction = Direction.RIGHT;
 		turn(degrees);
 	}
-}
-
-enum Direction {
-	LEFT, FRONT, RIGHT, BACK;
+	
 }

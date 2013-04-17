@@ -6,10 +6,13 @@ import lejos.nxt.SensorPort;
  * Abstraction for the light-sensor
  */
 public class ColourSensor {
+	private static final String name = "Colour Sensor";
+	private static final String port = "S4";
 	private static LightSensor lightSensor = new LightSensor(SensorPort.S4);
 	
-	public static int checkForFaillure() {
-		return 1;
+	public static Error checkForFaillure() {
+		Error error = new Error(name, port);
+		return error;
 	}
 	
 }

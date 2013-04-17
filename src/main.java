@@ -1,15 +1,17 @@
 import java.util.ArrayList;
 
 public class main {
-	private static ArrayList<Integer> errors;
+	private static ArrayList<Error> errors;
 	
 	public static void main(String[] args) throws InterruptedException {
 		init();
+		Screen.writeLn("123451234512345123451234512345");
+		//FaillureTest.startupTest();
 		//checkForFailure();
 
 		while(true) {
-			SonicSensor.isObject(Direction.FRONT);
-			Thread.sleep(500);
+			//SonicSensor.isObject(Direction.FRONT);
+			//Thread.sleep(500);
 		}
 		
 		//printInfoScreen();
@@ -27,9 +29,9 @@ public class main {
 	private static void init() { }
 	
 	private static void checkForFailure() {
-		errors = new ArrayList<Integer>();
-		
+		errors = new ArrayList<Error>();
 		errors.add(SonicSensor.checkForFaillure());
+		
 		Screen.writeLn("SonicSensor: " + SonicSensor.checkForFaillure());
 		Screen.writeLn("Press the bumper");
 		Screen.writeLn("BumperSensor" + BumperSensor.checkForFaillure());

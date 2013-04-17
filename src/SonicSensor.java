@@ -6,8 +6,8 @@ import lejos.nxt.UltrasonicSensor;
  * Abstraction for the distance-sensor
  */
 public class SonicSensor {
-	public static final String name = "Sonic Sensor";
-	public static final String port = "S1";
+	private static final String name = "Sonic Sensor";
+	private static final String port = "S1";
 	private static UltrasonicSensor sonicSensor = new UltrasonicSensor(SensorPort.S1);
 	
 	public static Direction checkForObstacles() {
@@ -27,22 +27,23 @@ public class SonicSensor {
 		boolean isObject = false;
 		
 		if (direction == Direction.FRONT) {
-			isObject = sonicSensor.getDistance() > 25 ? true : false;
+			isObject = sonicSensor.getDistance() > 70 ? true : false;
 		} else {
 			if (direction == Direction.LEFT) {
 				SonicSensorMotor.lookLeft();
 			} else if (direction == Direction.RIGHT) {
 				SonicSensorMotor.lookRight();
 			}
-			isObject = sonicSensor.getDistance() > 25 ? true : false;
+			isObject = sonicSensor.getDistance() > 70 ? true : false;
 			SonicSensorMotor.lookFront();
 		}
 		return isObject;
 	}
 	
-	public static int checkForFaillure() {
-		if (sonicSensor.ping() == 0)
-			return 0;
-		return 1;
+	public static Error checkForFaillure() {
+		Error error = new Error(name, port);
+		if (sonicSensor.ping() > 0)
+			return error.setHasErrors(true);
+		return error;
 	}
 }
