@@ -38,7 +38,3 @@ public class SonicSensorMotor {
 	}
 	
 }
-
-enum Direction {
-	LEFT, FRONT, RIGHT, BACK;
-}
