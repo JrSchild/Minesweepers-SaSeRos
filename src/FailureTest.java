@@ -4,19 +4,19 @@ import java.util.ArrayList;
  * @author Joram Ruitenschild
  * Test all Sensors and components
  */
-public class FaillureTest {
+public class FailureTest {
 	private static ArrayList<Error> errors;
 	
 	public static boolean startupTest() {
 		test(SonicSensor.checkForFaillure());
 		test(ColourSensor.checkForFaillure());
 		test(BumperSensor.checkForFaillure());
-		return FaillureTest.hasErrors();
+		return FailureTest.hasErrors();
 	}
 	public static boolean testForFaillures() {
 		test(SonicSensor.checkForFaillure());
 		test(ColourSensor.checkForFaillure());
-		return FaillureTest.hasErrors();
+		return FailureTest.hasErrors();
 	}
 
 	public static void test(Error error) {

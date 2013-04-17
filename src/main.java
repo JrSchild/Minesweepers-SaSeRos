@@ -4,10 +4,10 @@ public class main {
 	
 	public static void main(String[] args) throws InterruptedException {
 		init();
-		Screen.writeLn("123451234512345123451234512345");
-		//FaillureTest.startupTest();
+		
+		FailureTest.startupTest();
+		
 		//checkForFailure();
-		BumperSensor.writeTime();
 		while(true) {
 			//SonicSensor.isObject(Direction.FRONT);
 			//Thread.sleep(500);
