@@ -62,7 +62,11 @@ class Movement{
 		return this.lastTurn;
 	}
 	
-	public Direction checkForObstacles(){
+	/*
+	 * This method uses the UltraSonic Sensor to check for obstacles in its path.
+	 * The method returns a direction.
+	 */
+	public static Direction checkForObstacles(){
 		Direction turn;
 		boolean left = SonicSensor.isObject(Direction.LEFT);
 		boolean front = SonicSensor.isObject(Direction.FRONT);
@@ -83,6 +87,10 @@ class Movement{
 		return turn;	
 	}
 	
+	/*
+	 * This is a helping method for the avoidObstacle() method.
+	 * it returns a direction.
+	 */
 	public Direction nextTurn(Direction prevTurn){
 		Direction nextTurn = (prevTurn == Direction.LEFT)?Direction.RIGHT:Direction.LEFT;
 		return nextTurn;
@@ -118,7 +126,7 @@ class Movement{
 							turnNXT(temp);
 						}
 					}
-					else if(SonicSensor.checkForObstacles() == temp){
+					else if(checkForObstacles() == temp){
 						turnNXT(temp);
 					}
 					else{ // Turns 180 deg
