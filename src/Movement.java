@@ -2,7 +2,7 @@ import lejos.nxt.*;
 
 class Movement{
 	
-	private Direction lastTurn;
+	private Direction lastTurn = Direction.LEFT;
 	
 	/*
 	 * This method makes the robot drive FRONT or BACK depending on the direction it is given.
@@ -62,6 +62,27 @@ class Movement{
 		return this.lastTurn;
 	}
 	
+	public Direction checkForObstacles(){
+		Direction turn;
+		boolean left = SonicSensor.isObject(Direction.LEFT);
+		boolean front = SonicSensor.isObject(Direction.FRONT);
+		boolean right = SonicSensor.isObject(Direction.RIGHT);
+		
+		if(!left && !right){
+			turn = getLastTurn(); 
+		}
+		else if(left && right){
+			turn = Direction.BACK;
+		}
+		else if(left && !right){
+			turn = Direction.RIGHT;
+		}
+		else if(!left && right){
+			turn = Direction.LEFT;
+		}
+		return turn;	
+	}
+	
 	public Direction nextTurn(Direction prevTurn){
 		Direction nextTurn = (prevTurn == Direction.LEFT)?Direction.RIGHT:Direction.LEFT;
 		return nextTurn;
@@ -71,7 +92,7 @@ class Movement{
 	 * This method is used to avoid objects.
 	 */
 	public void avoidObstacle(){
-		Direction temp = SonicSensor.checkForObstacles();
+		Direction temp = checkForObstacles();
 		Direction nextTurn = nextTurn(temp);
 		if(temp != null){
 			if(temp != Direction.BACK){
@@ -79,17 +100,17 @@ class Movement{
 				// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
 				drive(Direction.FRONT);
 				Thread.sleep(1500);
-				if(SonicSensor.checkForObstacles() != temp && SonicSensor.checkForObstacles() != Direction.BACK){ // True if the robot is not cornered
+				if(checkForObstacles() != temp && checkForObstacles() != Direction.BACK){ // True if the robot is not cornered
 					turnNXT(nextTurn);// Turns the opposite direction so it is able to go around an obstacle(1st turn)
 					// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
 					drive(Direction.FRONT);
 					Thread.sleep(1500);
-					if(SonicSensor.checkForObstacles() != temp && SonicSensor.checkForObstacles() != Direction.BACK){
+					if(checkForObstacles() != temp && checkForObstacles() != Direction.BACK){
 						turnNXT(nextTurn);// Turns it once more in the same direction(2nd turn)
 						// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
 						drive(Direction.FRONT);
 						Thread.sleep(1500);
-						if(SonicSensor.checkForObstacles() != nextTurn && SonicSensor.checkForObstacles() != Direction.BACK){
+						if(checkForObstacles() != nextTurn && checkForObstacles() != Direction.BACK){
 							turnNXT(temp);// Turns it in the opposite direction(3rd turn)
 						}
 						else{ // Turns 180 deg
