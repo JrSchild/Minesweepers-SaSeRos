@@ -22,11 +22,10 @@ public class BumperSensor {
 	}
 	
 	public static Error checkForFaillure() {
-		Error error = new Error(name, port);
 		Screen.writeLn("Press the bumper.");
 		while (true) {
 			if (touchSensor.isPressed())
-				return error;
+				return new Error(name, port, true);
 		}
 	}
 }
