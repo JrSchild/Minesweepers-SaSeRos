@@ -8,6 +8,9 @@ import lejos.nxt.NXTRegulatedMotor;
 public class SonicSensorMotor {
 	private static Direction direction = Direction.FRONT;
 	private static NXTRegulatedMotor motor = Motor.C;
+
+	private static final int frontToLeft = 50;
+	private static final int frontToRight = 50;
 	
 	public static void turn(int angle) {
 		motor.rotate(angle);
@@ -17,22 +20,20 @@ public class SonicSensorMotor {
 	}
 	
 	public static void lookLeft() {
-		int degrees = (direction == Direction.FRONT) ? 100 :
-			(direction == Direction.RIGHT) ? 200 : 0;
+		int degrees = (direction == Direction.FRONT) ? frontToLeft : 0;
 		direction = Direction.LEFT;
 		turn(degrees);
 	}
 	
 	public static void lookFront() {
-		int degrees = (direction == Direction.LEFT) ? -100 :
-			(direction == Direction.RIGHT) ? 100 : 0;
+		int degrees = (direction == Direction.LEFT) ? -frontToLeft :
+			(direction == Direction.RIGHT) ? frontToRight : 0;
 		direction = Direction.FRONT;
 		turn(degrees);
 	}
 	
 	public static void lookRight() {
-		int degrees = (direction == Direction.LEFT) ? -200 :
-			(direction == Direction.FRONT) ? -100 : 0;
+		int degrees = (direction == Direction.FRONT) ? -frontToRight : 0;
 		direction = Direction.RIGHT;
 		turn(degrees);
 	}

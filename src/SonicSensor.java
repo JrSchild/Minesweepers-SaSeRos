@@ -40,8 +40,8 @@ public class SonicSensor {
 	}
 	
 	public static Error checkForFaillure() {
-		if (sonicSensor.ping() > 0)
-			return new Error(name, port, true);
-		return null;
+		if (sonicSensor.ping() == 0)
+			return null;
+		return new Error(name, port, true);
 	}
 }

@@ -16,10 +16,13 @@ public class BumperSensor {
 		long current = System.currentTimeMillis();
 		while (true) {
 			long diff = (int) (System.currentTimeMillis() - current);
-			if (touchSensor.isPressed())
+			if (touchSensor.isPressed()) {
+				Screen.clear();
 				return null;
-			else if (diff > maxPressBumperTime)
-				new Error(name, port, true);
+			} else if (diff > maxPressBumperTime) {
+				Screen.clear();
+				return new Error(name, port, true);
+			}
 		}
 	}
 }

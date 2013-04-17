@@ -1,17 +1,25 @@
-import java.util.ArrayList;
-
 public class main {
 	
 	public static void main(String[] args) throws InterruptedException {
 		init();
-		
-		FailureTest.startupTest();
+
+		//FailureTest.startupTest();
+		SonicSensorMotor.lookRight();
+		SonicSensorMotor.lookFront();
+		SonicSensorMotor.lookRight();
+		SonicSensorMotor.lookFront();
+		SonicSensorMotor.lookRight();
+		SonicSensorMotor.lookFront();
+		SonicSensorMotor.lookRight();
+		SonicSensorMotor.lookFront();
+		SonicSensorMotor.lookRight();
+		SonicSensorMotor.lookFront();
 		
 		//checkForFailure();
-		while(true) {
+		//while(true) {
 			//SonicSensor.isObject(Direction.FRONT);
-			//Thread.sleep(500);
-		}
+		//Thread.sleep(1000);
+		//}
 		
 		//printInfoScreen();
 		/*for (int i = 0; i < 3; i++) {
