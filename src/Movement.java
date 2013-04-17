@@ -73,50 +73,47 @@ class Movement{
 	public void avoidObstacle(){
 		Direction temp = checkForObstacles();
 		Direction nextTurn = nextTurn(temp);
-		
-		if(temp != Direction.BACK){
-			turnNXT(temp);// turns either right or left depending on the feedback from checkForObstacles()
-			// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
-			drive(Direction.FRONT);
-			Thread.sleep(1500);
-			if(checkForObstacles() != temp && checkForObstacles() != Direction.BACK){ // True if the robot is not cornered
-				turnNXT(nextTurn);// Turns the opposite direction so it is able to go around an obstacle(1st turn)
+		if(temp != null){
+			if(temp != Direction.BACK){
+				turnNXT(temp);// turns either right or left depending on the feedback from checkForObstacles()
 				// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
 				drive(Direction.FRONT);
 				Thread.sleep(1500);
-				if(checkForObstacles() != temp && checkForObstacles() != Direction.BACK){
-					turnNXT(nextTurn);// Turns it once more in the same direction(2nd turn)
+				if(checkForObstacles() != temp && checkForObstacles() != Direction.BACK){ // True if the robot is not cornered
+					turnNXT(nextTurn);// Turns the opposite direction so it is able to go around an obstacle(1st turn)
 					// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
 					drive(Direction.FRONT);
 					Thread.sleep(1500);
-					if(checkForObstacles() != nextTurn && checkForObstacles() != Direction.BACK){
-						turnNXT(temp);// Turns it in the opposite direction(3rd turn)
+					if(checkForObstacles() != temp && checkForObstacles() != Direction.BACK){
+						turnNXT(nextTurn);// Turns it once more in the same direction(2nd turn)
+						// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
+						drive(Direction.FRONT);
+						Thread.sleep(1500);
+						if(checkForObstacles() != nextTurn && checkForObstacles() != Direction.BACK){
+							turnNXT(temp);// Turns it in the opposite direction(3rd turn)
+						}
+						else{ // Turns 180 deg
+							turnNXT(temp);
+							turnNXT(temp);
+						}
+					}
+					else if(checkForObstacles() == temp){
+						turnNXT(temp);
 					}
 					else{ // Turns 180 deg
 						turnNXT(temp);
 						turnNXT(temp);
 					}
 				}
-				else if(checkForObstacles() == temp){
+				else{ // Turns 90 deg
 					turnNXT(temp);
 				}
-				else{ // Turns 180 deg
-					turnNXT(temp);
-					turnNXT(temp);
-				}
+				
 			}
-			else{ // Turns 90 deg
+			else{ // Turns 180 deg
+				turnNXT(temp);
 				turnNXT(temp);
 			}
-			
-		}
-		else{ // Turns 180 deg
-			turnNXT(temp);
-			turnNXT(temp);
-		}
-			//turnNXT(left or right), drives FRONT while continously checking left/right.
-			//if the sonicsensor returnNXTs a greater int it turnNXTs the given direction.
-			//else it turnNXTs the same direction and drives FRONT.
-		//
+		}	
 	}
 }
