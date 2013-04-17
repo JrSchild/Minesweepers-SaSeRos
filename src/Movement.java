@@ -71,25 +71,25 @@ class Movement{
 	 * This method is used to avoid objects.
 	 */
 	public void avoidObstacle(){
-		Direction temp = checkForObstacles();
+		Direction temp = SonicSensor.checkForObstacles();
 		Direction nextTurn = nextTurn(temp);
 		if(temp != null){
 			if(temp != Direction.BACK){
-				turnNXT(temp);// turns either right or left depending on the feedback from checkForObstacles()
+				turnNXT(temp);// turns either right or left depending on the feedback from SonicSensor.checkForObstacles()
 				// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
 				drive(Direction.FRONT);
 				Thread.sleep(1500);
-				if(checkForObstacles() != temp && checkForObstacles() != Direction.BACK){ // True if the robot is not cornered
+				if(SonicSensor.checkForObstacles() != temp && SonicSensor.checkForObstacles() != Direction.BACK){ // True if the robot is not cornered
 					turnNXT(nextTurn);// Turns the opposite direction so it is able to go around an obstacle(1st turn)
 					// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
 					drive(Direction.FRONT);
 					Thread.sleep(1500);
-					if(checkForObstacles() != temp && checkForObstacles() != Direction.BACK){
+					if(SonicSensor.checkForObstacles() != temp && SonicSensor.checkForObstacles() != Direction.BACK){
 						turnNXT(nextTurn);// Turns it once more in the same direction(2nd turn)
 						// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
 						drive(Direction.FRONT);
 						Thread.sleep(1500);
-						if(checkForObstacles() != nextTurn && checkForObstacles() != Direction.BACK){
+						if(SonicSensor.checkForObstacles() != nextTurn && SonicSensor.checkForObstacles() != Direction.BACK){
 							turnNXT(temp);// Turns it in the opposite direction(3rd turn)
 						}
 						else{ // Turns 180 deg
@@ -97,7 +97,7 @@ class Movement{
 							turnNXT(temp);
 						}
 					}
-					else if(checkForObstacles() == temp){
+					else if(SonicSensor.checkForObstacles() == temp){
 						turnNXT(temp);
 					}
 					else{ // Turns 180 deg
