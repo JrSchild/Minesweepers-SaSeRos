@@ -3,14 +3,15 @@ import lejos.nxt.*;
 class Movement{
 	
 	private Direction lastTurn = Direction.LEFT;
+	private int[] turnValue = {240,245,255,260,270};
 	
 	/*
 	 * This method makes the robot drive FRONT or BACK depending on the direction it is given.
 	 */
 	public void drive(Direction direction){ 	
 		if(direction == Direction.FRONT){
-			Motor.A.FRONT();
-			Motor.B.FRONT();
+			Motor.A.forward();
+			Motor.B.forward();
 		}
 		else if(direction == Direction.BACK){
 			Motor.A.backward();
@@ -40,15 +41,17 @@ class Movement{
 	}
 	
 	/*
-	 * This is a basic turning mechanism depending on the direction it is given.
+	 * This is a basic turning mechanism.
 	 * This method is not used!
 	 */
-	public void wallTurn(Direction fbDirection, Direction lrDirection) throws InterruptedException{
+	public void easyTurningFunction(){
 		stop();
-		drive(fbDirection);
-		Thread.sleep(700);
-		turnNXT(lrDirection);
-		
+		randomTurn();
+	}
+	
+	private void randomTurn(){
+		int rnd = Math.random() * 4;
+		Motor.A.rotate(turnValue[rnd]);
 	}
 	
 	/*
