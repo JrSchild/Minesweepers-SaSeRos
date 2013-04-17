@@ -8,24 +8,18 @@ import lejos.nxt.TouchSensor;
 public class BumperSensor {
 	private static final String name = "Bumper Sensor";
 	private static final String port = "S2";
+	private static final int maxPressBumperTime = 10000;
 	private static TouchSensor touchSensor = new TouchSensor(SensorPort.S2);
-
-	// test function to see if time gets updated during runtime
-	public static void writeTime() {
-		while(true) {
-			Screen.clear();
-			Screen.writeLn("currentTimeMillis: " + System.currentTimeMillis());
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) { }
-		}
-	}
 	
 	public static Error checkForFaillure() {
-		Screen.writeLn("Press the bumper.");
+		Screen.writeLn("Press the bumper within " + (maxPressBumperTime / 1000) + " seconds");
+		long current = System.currentTimeMillis();
 		while (true) {
+			long diff = (int) (System.currentTimeMillis() - current);
 			if (touchSensor.isPressed())
-				return new Error(name, port, true);
+				return null;
+			else if (diff > maxPressBumperTime)
+				new Error(name, port, true);
 		}
 	}
 }
