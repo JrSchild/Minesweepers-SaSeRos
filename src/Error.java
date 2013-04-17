@@ -1,14 +1,20 @@
 public class Error {
-	private boolean hasErrors = false;
 	private String name;
 	private String port;
+	private boolean hasErrors;
 	
 	public Error() {}
 	
 	public Error(String name, String port) {
-		this.hasErrors = false;
 		this.name = name;
 		this.port = port;
+		this.hasErrors = false;
+	}
+	
+	public Error(String name, String port, boolean hasErrors) {
+		this.name = name;
+		this.port = port;
+		this.hasErrors = hasErrors;
 	}
 
 	public boolean isHasErrors() {

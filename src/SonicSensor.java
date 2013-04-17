@@ -25,7 +25,6 @@ public class SonicSensor {
 	
 	public static boolean isObject(Direction direction) {
 		boolean isObject = false;
-		
 		if (direction == Direction.FRONT) {
 			isObject = sonicSensor.getDistance() > 70 ? true : false;
 		} else {
@@ -41,9 +40,8 @@ public class SonicSensor {
 	}
 	
 	public static Error checkForFaillure() {
-		Error error = new Error(name, port);
 		if (sonicSensor.ping() > 0)
-			return error.setHasErrors(true);
-		return error;
+			return new Error(name, port, true);
+		return null;
 	}
 }

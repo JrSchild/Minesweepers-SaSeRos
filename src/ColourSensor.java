@@ -11,8 +11,8 @@ public class ColourSensor {
 	private static LightSensor lightSensor = new LightSensor(SensorPort.S4);
 	
 	public static Error checkForFaillure() {
-		Error error = new Error(name, port);
-		return error;
+		Error error = new Error(name, port, true);
+		return null;
 	}
 	
 }
