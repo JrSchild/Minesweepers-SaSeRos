@@ -5,14 +5,14 @@ class Movement{
 	private Direction lastTurn;
 	
 	/*
-	 * This method makes the robot drive forward or backwards depending on the direction it is given.
+	 * This method makes the robot drive FRONT or BACK depending on the direction it is given.
 	 */
 	public void drive(Direction direction){ 	
-		if(direction == Direction.FORWARD){
-			Motor.A.forward();
-			Motor.B.forward();
+		if(direction == Direction.FRONT){
+			Motor.A.FRONT();
+			Motor.B.FRONT();
 		}
-		else if(direction == Direction.BACKWARDS){
+		else if(direction == Direction.BACK){
 			Motor.A.backward();
 			Motor.B.backward();
 		}
@@ -27,7 +27,7 @@ class Movement{
 	}
 	
 	/*
-	 * This method makes the robot turnNXT 90 deg to the given direction
+	 * This method makes the robot turn 90 deg to the given direction
 	 */
 	public void turnNXT(Direction direction){
 		if(direction == Direction.RIGHT){
@@ -41,6 +41,7 @@ class Movement{
 	
 	/*
 	 * This is a basic turning mechanism depending on the direction it is given.
+	 * This method is not used!
 	 */
 	public void wallTurn(Direction fbDirection, Direction lrDirection) throws InterruptedException{
 		stop();
@@ -53,8 +54,8 @@ class Movement{
 	/*
 	 * This method keeps track of witch direction the robot turned last time.
 	 */
-	public void setLastTurn(Direction lastturnNXT){
-		this.lastTurn = lastturnNXT;
+	public void setLastTurn(Direction lastTurn){
+		this.lastTurn = lastTurn;
 	}
 	
 	public Direction getLastTurn(){
@@ -73,22 +74,22 @@ class Movement{
 		Direction temp = checkForObstacles();
 		Direction nextTurn = nextTurn(temp);
 		
-		if(temp != Direction.BACKWARDS){
+		if(temp != Direction.BACK){
 			turnNXT(temp);// turns either right or left depending on the feedback from checkForObstacles()
 			// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
-			drive(Direction.FORWARD);
+			drive(Direction.FRONT);
 			Thread.sleep(1500);
-			if(checkForObstacles() != temp && checkForObstacles() != Direction.BACKWARDS){ // True if the robot is not cornered
+			if(checkForObstacles() != temp && checkForObstacles() != Direction.BACK){ // True if the robot is not cornered
 				turnNXT(nextTurn);// Turns the opposite direction so it is able to go around an obstacle(1st turn)
 				// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
-				drive(Direction.FORWARD);
+				drive(Direction.FRONT);
 				Thread.sleep(1500);
-				if(checkForObstacles() != temp && checkForObstacles() != Direction.BACKWARDS){
+				if(checkForObstacles() != temp && checkForObstacles() != Direction.BACK){
 					turnNXT(nextTurn);// Turns it once more in the same direction(2nd turn)
 					// Implement!: turn UltraSonic Sensor in the other direction left = right, right = left.
-					drive(Direction.FORWARD);
+					drive(Direction.FRONT);
 					Thread.sleep(1500);
-					if(checkForObstacles() != nextTurn && checkForObstacles() != Direction.BACKWARDS){
+					if(checkForObstacles() != nextTurn && checkForObstacles() != Direction.BACK){
 						turnNXT(temp);// Turns it in the opposite direction(3rd turn)
 					}
 					else{ // Turns 180 deg
@@ -113,9 +114,9 @@ class Movement{
 			turnNXT(temp);
 			turnNXT(temp);
 		}
-			//turnNXT(left or right), drives forward while continously checking left/right.
+			//turnNXT(left or right), drives FRONT while continously checking left/right.
 			//if the sonicsensor returnNXTs a greater int it turnNXTs the given direction.
-			//else it turnNXTs the same direction and drives forward.
+			//else it turnNXTs the same direction and drives FRONT.
 		//
 	}
 }
