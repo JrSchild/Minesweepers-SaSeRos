@@ -26,7 +26,7 @@ public class SonicSensor {
 	public static boolean isObject(Direction direction) {
 		boolean isObject = false;
 		if (direction == Direction.FRONT) {
-			isObject = sonicSensor.getDistance() > 70 ? true : false;
+			isObject = sonicSensor.getDistance() > 25 ? true : false;
 		} else {
 			if (direction == Direction.LEFT) {
 				SonicSensorMotor.lookLeft();

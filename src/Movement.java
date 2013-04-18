@@ -3,7 +3,11 @@ import lejos.nxt.*;
 class Movement{
 	
 	private Direction lastTurn = Direction.LEFT;
+<<<<<<< HEAD
 	private int[] turnValue = {240,245,255,260,270};
+=======
+	private int[] turnValue = {300,400,255,350,370};
+>>>>>>> adding some stuff
 	
 	/*
 	 * This method makes the robot drive FRONT or BACK depending on the direction it is given.
@@ -50,7 +54,11 @@ class Movement{
 	}
 	
 	private void randomTurn(){
+<<<<<<< HEAD
 		int rnd = Math.random() * 4;
+=======
+		int rnd = (int) Math.round(Math.random() * (double) 4);
+>>>>>>> adding some stuff
 		Motor.A.rotate(turnValue[rnd]);
 	}
 	
@@ -69,8 +77,13 @@ class Movement{
 	 * This method uses the UltraSonic Sensor to check for obstacles in its path.
 	 * The method returns a direction.
 	 */
+<<<<<<< HEAD
 	public static Direction checkForObstacles(){
 		Direction turn;
+=======
+	public Direction checkForObstacles(){
+		Direction turn = Direction.LEFT;
+>>>>>>> adding some stuff
 		boolean left = SonicSensor.isObject(Direction.LEFT);
 		boolean front = SonicSensor.isObject(Direction.FRONT);
 		boolean right = SonicSensor.isObject(Direction.RIGHT);
@@ -102,7 +115,11 @@ class Movement{
 	/*
 	 * This method is used to avoid objects.
 	 */
+<<<<<<< HEAD
 	public void avoidObstacle(){
+=======
+	public void avoidObstacle() throws InterruptedException{
+>>>>>>> adding some stuff
 		Direction temp = checkForObstacles();
 		Direction nextTurn = nextTurn(temp);
 		if(temp != null){
