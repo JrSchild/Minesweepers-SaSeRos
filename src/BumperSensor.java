@@ -10,16 +10,23 @@ public class BumperSensor {
 	private static final String port = "S2";
 	private static final int maxPressBumperTime = 10000;
 	private static TouchSensor touchSensor = new TouchSensor(SensorPort.S2);
+
+	public static boolean isPressed() {
+		return touchSensor.isPressed();
+	}
 	
 	public static Error checkForFaillure() {
 		Screen.writeLn("Press the bumper within " + (maxPressBumperTime / 1000) + " seconds");
 		long current = System.currentTimeMillis();
 		while (true) {
 			long diff = (int) (System.currentTimeMillis() - current);
-			if (touchSensor.isPressed())
+			if (touchSensor.isPressed()) {
+				Screen.clear();
 				return null;
-			else if (diff > maxPressBumperTime)
-				new Error(name, port, true);
+			} else if (diff > maxPressBumperTime) {
+				Screen.clear();
+				return new Error(name, port, true);
+			}
 		}
 	}
 }
