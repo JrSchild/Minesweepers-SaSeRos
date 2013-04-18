@@ -15,7 +15,7 @@ public class main {
 		int i = 0;
 		while(true) {
 				movement.drive(Direction.FRONT);
-				if (BumperSensor.isPressed()) {
+				if (BumperSensor.isPressed() || ColourSensor.blackDetected()) {
 					movement.drive(Direction.BACK);
 					Thread.sleep(1000);
 					movement.easyTurningFunction();
