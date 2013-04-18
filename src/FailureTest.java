@@ -2,12 +2,12 @@
  * @author Joram Ruitenschild
  * Test all Sensors and components
  */
-public class FailureTest {
+public class FailureTest extends Thread {
 	
 	public static void startupTest() {
 		test(SonicSensor.checkForFaillure());
+		test(ColourSensor.checkForFaillure());
 		test(BumperSensor.checkForFaillure());
-		//test(ColourSensor.checkForFaillure());
 	}
 	public static void testForFaillures() {
 		test(SonicSensor.checkForFaillure());
